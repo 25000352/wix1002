@@ -1,0 +1,81 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package L100204;
+//THE TASK IS : FROM DEMO'S CODE MAKE IT NOVEMBER ONLY, AND START WITH MONDAY
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author alisd
+ */
+public class L4_TASK {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            // 1. Get the input from users Input
+            System.out.print("Enter the year: ");
+            int year = sc.nextInt();
+            System.out.print("Enter the first day of the year (0-6): ");
+            int firstDayOfYear = sc.nextInt();
+
+            // 2. Perform required calculation Processing
+            boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            //Days before 1st of the month
+            int dayUntilMay = 31 + (isLeapYear ? 29 : 28) + 31 + 30;
+            int dayUntilAug = dayUntilMay + 31 + 30 + 31;
+            int dayUntilNov = dayUntilAug + 31 + 30 + 31;
+            
+            //Calculate starting column offset (nak start MOnday as 0)
+            int startoffsetofYear = firstDayOfYear - 1;
+            int firstDayOfMay = (startoffsetofYear + dayUntilMay) % 7;
+            int firstDayOfAug = (startoffsetofYear + dayUntilAug) % 7;
+            int firstDayofNov = (startoffsetofYear + dayUntilNov) % 7;
+
+            String columnFormat = "%4s";
+            String format = "%4s%4s%4s%4s%4s%4s%4s%n"; // string formatting - different types of string formatting
+
+            // 3. Print the calendar of May Output
+            System.out.printf(format, "\n", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+            for (int i = 0; i < firstDayOfMay; i++) {
+                System.out.printf(columnFormat, "");
+            }
+            for (int i = 1; i <= 31; i++) {
+                System.out.printf(columnFormat, i);
+                if ((i + firstDayOfMay) % 7 == 0) {
+                    System.out.println();
+                }
+            }
+
+            System.out.println();
+
+            // 4. Print the calendar of August
+            System.out.printf(format, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+            for (int i = 0; i < firstDayOfAug; i++) {
+                System.out.printf(columnFormat, "");
+            }
+            for (int i = 1; i <= 31; i++) {
+                System.out.printf(columnFormat, i);
+                if ((i + firstDayOfAug) % 7 == 0) {
+                    System.out.println();
+                }
+            }
+            
+            System.out.println();
+            
+            //5. November
+            System.out.println("Task : November");
+            System.out.printf(format, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+            for (int i = 0; i<firstDayofNov; i++){
+                System.out.printf(columnFormat, "");
+            }
+            for (int i = 1; i <= 30; i++){
+                System.out.printf(columnFormat, i, "\n");
+                if ((i + firstDayofNov) % 7 == 0){
+                    System.out.println();
+                }
+            }
+        }
+    }
+}
